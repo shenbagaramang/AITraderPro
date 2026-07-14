@@ -93,7 +93,7 @@ cd AITraderPro
 
 cp .env.example .env
 # Generate a real secret:
-sed -i "s|^SECRET_KEY=.*|SECRET_KEY=$(openssl rand -hex 32)|" .env
+sed -i '' "s|^SECRET_KEY=.*|SECRET_KEY=$(openssl rand -hex 32)|" .env
 
 docker compose up -d --build
 ```
@@ -216,4 +216,3 @@ The suite covers password hashing and salting, JWT claim/type/expiry/tamper hand
 ## License
 
 MIT — see [LICENSE](LICENSE).
-# AITraderPro

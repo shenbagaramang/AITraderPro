@@ -1,0 +1,38 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+
+# Virtualenvs
+.venv/
+venv/
+env/
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# Testing
+.pytest_cache/
+.coverage
+coverage.xml
+htmlcov/
+.mypy_cache/
+.ruff_cache/
+
+# Editors
+.idea/
+*.swp
+.DS_Store
+
+# Runtime
+*.log
+*.db
+*.sqlite3
+postgres_data/
+redis_data/
+.streamlit/secrets.toml

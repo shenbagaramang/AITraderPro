@@ -1,0 +1,37 @@
+# --- API ---
+# --- API ---
+# Pin FastAPI to a released version compatible with our stack
+fastapi==0.128.8
+uvicorn[standard]==0.34.0
+python-multipart==0.0.20
+
+# --- Config & validation ---
+# Allow a pydantic version compatible with `mcp` (>=2.11)
+pydantic>=2.11.0,<3.0.0
+pydantic-settings==2.7.0
+email-validator==2.2.0
+
+# --- Database ---
+sqlalchemy[asyncio]==2.0.36
+asyncpg==0.30.0
+alembic==1.14.0
+greenlet==3.1.1
+
+# --- Cache ---
+redis==5.2.1
+cryptography==44.0.0
+kiteconnect==5.0.1
+mcp==1.25.0
+yfinance==1.5.1
+anthropic==0.69.0  # optional: Claude news classifier
+
+# --- Auth ---
+pyjwt==2.10.1
+passlib[bcrypt]==1.7.4
+bcrypt==4.2.1
+
+# --- Dashboard ---
+streamlit==1.41.1
+pandas==2.2.3
+plotly==5.24.1
+httpx==0.28.1

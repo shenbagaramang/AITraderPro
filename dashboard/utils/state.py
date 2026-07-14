@@ -61,7 +61,4 @@ def render_sidebar() -> None:
             st.caption(f"🔴 API unreachable — {exc}")
 
         st.divider()
-        st.caption("Phase 1 · Foundation")
-        st.caption("Phase 2 · Kite (planned)")
-        st.caption("Phase 3 · TradingView MCP (planned)")
-        st.caption("Phase 4 · Scanner (planned)")
+        st.caption("Foundation · Kite · MCP · Scanner — all live")

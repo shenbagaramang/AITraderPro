@@ -178,6 +178,48 @@ class ApiClient:
     def cancel_order(self, order_id: int) -> dict[str, Any]:
         return self._request("DELETE", f"/orders/{order_id}")
 
+    # --- analysis: technical agent, decision engine, Pine (Phase 3/4) ------------
+    def analyze_technical(self, symbol: str, candles: list[dict[str, Any]]) -> dict[str, Any]:
+        return self._request(
+            "POST", "/analysis/technical", json={"symbol": symbol, "candles": candles}
+        )
+
+    def analyze_decide(
+        self,
+        symbol: str,
+        candles: list[dict[str, Any]],
+        equity: float,
+        lot_size: int = 1,
+    ) -> dict[str, Any]:
+        return self._request(
+            "POST",
+            "/analysis/decide",
+            json={
+                "symbol": symbol,
+                "candles": candles,
+                "equity": equity,
+                "lot_size": lot_size,
+            },
+        )
+
+    def pine_templates(self) -> list[str]:
+        return self._request("GET", "/analysis/pine/templates")["templates"]
+
+    def generate_pine(self, scanner: str, params: dict[str, Any]) -> dict[str, Any]:
+        return self._request(
+            "POST", "/analysis/pine", json={"scanner": scanner, "params": params}
+        )
+
+    # --- research: fundamentals, news, market context (Phase 4a) -----------------
+    def fundamental(self, symbol: str) -> dict[str, Any]:
+        return self._request("GET", f"/research/fundamental/{symbol}")
+
+    def news(self, symbol: str, days: int = 7) -> dict[str, Any]:
+        return self._request("GET", f"/research/news/{symbol}", params={"days": days})
+
+    def market_context(self) -> dict[str, Any]:
+        return self._request("GET", "/research/context")
+
 
 def _paper(paper: bool | None) -> dict[str, Any]:
     return {} if paper is None else {"paper": str(paper).lower()}

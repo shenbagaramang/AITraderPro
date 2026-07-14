@@ -27,11 +27,24 @@ anthropic==0.69.0  # optional: Claude news classifier
 
 # --- Auth ---
 pyjwt==2.10.1
+# passlib 1.7.4 (its last release) probes bcrypt.__about__.__version__ to log
+# the backend version. bcrypt>=4.0 dropped that module, so passlib logs a
+# trapped AttributeError warning on every startup. Pinned to the last 3.x
+# release, which still has __about__; the on-disk hash format is unaffected
+# either way, so this doesn't touch already-stored password hashes.
 passlib[bcrypt]==1.7.4
-bcrypt==4.2.1
+bcrypt==3.2.2
 
 # --- Dashboard ---
 streamlit==1.41.1
 pandas==2.2.3
+# pandas==2.2.3's compiled C extensions target an older numpy/pyarrow ABI.
+# Left unpinned, pip resolves numpy/pyarrow to whatever is newest, and the ABI
+# mismatch segfaults (SIGSEGV) the process the moment a DataFrame with real
+# rows crosses into pyarrow (st.dataframe, e.g. the Trade page's order book) --
+# it doesn't raise a Python exception, so it just silently kills and restarts
+# the container, wiping the Streamlit session and forcing a fresh login.
+numpy==1.26.4
+pyarrow==16.1.0
 plotly==5.24.1
 httpx==0.28.1

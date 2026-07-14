@@ -91,7 +91,9 @@ class Settings(BaseSettings):
     TRADINGVIEW_WEBHOOK_SECRET: str = ""
 
     # --- Bootstrap superuser ----------------------------------------------
-    FIRST_SUPERUSER_EMAIL: str = "admin@aitraderpro.local"
+    # Not .local: EmailStr rejects it as an RFC 6762 special-use domain, which
+    # silently failed both this bootstrap and login on every restart.
+    FIRST_SUPERUSER_EMAIL: str = "admin@aitraderpro.dev"
     FIRST_SUPERUSER_PASSWORD: str = "ChangeMe123!"
 
     # --- Derived -----------------------------------------------------------
